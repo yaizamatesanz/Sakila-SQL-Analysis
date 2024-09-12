@@ -1,10 +1,13 @@
 USE sakila;
+
 -- 1. Selecciona todos los nombres de las películas sin que aparezcan duplicados.
+-- DISTINCT para eliminar duplicados en los títulos de películas.
 
 SELECT DISTINCT title
 FROM film;
 
 -- 2. Muestra los nombres de todas las películas que tengan una clasificación de "PG-13".
+-- Se filtran las películas que tienen la clasificación "PG-13" usando WHERE.
 
 SELECT title
 FROM film
@@ -12,17 +15,18 @@ WHERE rating = 'PG-13';
 
 
 /* 3. Encuentra el título y la descripción de todas las películas que contengan 
-la palabra "amazing" en su descripción.*/
+la palabra "amazing" en su descripción.
+- LIKE para buscar patrones en las descripciones.*/
 
 SELECT title, description
 FROM film
 WHERE description LIKE '%amazing%';
 
--- tenemos otra opción con REGEXP, los dos en estecaso funcionan de la msma manera.
+/* Otra opción sería con REGEXP, los dos en este caso funcionan de la misma manera.
 
 SELECT title, description
 FROM film
-WHERE description REGEXP 'amazing';
+WHERE description REGEXP 'amazing';*/
 
 -- 4. Encuentra el título de todas las películas que tengan una duración mayor a 120 minutos.
 -- Añando la columna lenght para verificar que es mayor a 120.
@@ -32,33 +36,37 @@ FROM film
 WHERE length > 120;
 
 -- 5. Recupera los nombres de todos los actores.
+-- Selecciono solo el nombre de los actores de la tabla actor.
 
 SELECT first_name
 FROM actor;
 
 -- 6. Encuentra el nombre y apellido de los actores que tengan "Gibson" en su apellido.
+-- LIKE o REGEXP para buscar apellidos que contengan "Gibson".
 
 SELECT first_name, last_name
 FROM actor
 WHERE last_name LIKE 'Gibson';
 
--- WHERE last_name REGEXP 'Gibson';
-
 -- 7. Encuentra los nombres de los actores que tengan un actor_id entre 10 y 20.
+-- BETWEEN para definir el rango de IDs.
 
 SELECT first_name, last_name
 FROM actor
 WHERE actor_id BETWEEN 10 AND 20;
 
 /* 8. Encuentra el título de las películas en la tabla film que no sean 
-ni "R" ni "PG-13" en cuanto a su clasificación.*/
+ni "R" ni "PG-13" en cuanto a su clasificación.
+
+- NOT para excluir las películas con clasificación "R" y "PG-13" */
 
 SELECT title, rating
 FROM film
 WHERE rating NOT IN ('R', 'PG-13');
 
 /* 9. Encuentra la cantidad total de películas en cada clasificación 
-de la tabla film y muestra la clasificación junto con el recuento.*/
+de la tabla film y muestra la clasificación junto con el recuento.
+- Se agrupa por rating y se usa COUNT para contar las películas en cada grupo.*/
 
 SELECT rating, COUNT(*) AS total_films
 FROM film
@@ -67,10 +75,8 @@ GROUP BY rating;
 /*10. Encuentra la cantidad total de películas alquiladas por cada cliente 
 y muestra el ID del cliente, su nombre y apellido junto con la cantidad 
 de películas alquiladas.
-
-- INNER JOIN para conectar customer con rental, y luego COUNT para contar 
-los alquileres por cliente. No muestra los clientes que no hayan alquilado 
-todavía (LEFT JOIN)*/
+- Se conectan las tablas customer y rental, luego contamos los alquileres.
+No muestra los clientes que no hayan alquilado todavía (LEFT JOIN).*/
 
 SELECT c.customer_id, c.first_name, c.last_name, COUNT(r.rental_id) AS total_rentals
 FROM customer AS c
@@ -79,7 +85,8 @@ INNER JOIN rental AS r
 GROUP BY c.customer_id, c.first_name, c.last_name;
 
 /*11. Encuentra la cantidad total de películas alquiladas por categoría 
-y muestra el nombre de la categoría junto con el recuento de alquileres.*/
+y muestra el nombre de la categoría junto con el recuento de alquileres.
+- Se conectan las tablas film, category y rental para contar los alquileres por categoría.*/
 
 SELECT ca.name AS cat_name, COUNT(r.rental_id) AS total_rentals
 FROM rental AS r
@@ -94,14 +101,17 @@ INNER JOIN category AS ca
 GROUP BY ca.name;
 
 /*12. Encuentra el promedio de duración de las películas para cada clasificación 
-de la tabla film y muestra la clasificación junto con el promedio de duración.*/
+de la tabla film y muestra la clasificación junto con el promedio de duración.
+- Se calcula el promedio de la duración agrupando por clasificación.*/
 
 SELECT f.rating, AVG(length) AS avg_length
 FROM film AS f
 GROUP BY rating;
 
 /*13. Encuentra el nombre y apellido de los actores que aparecen en la película 
-con title "Indian Love".*/
+con title "Indian Love".
+- INNER JOIN entre las tablas film, actor y film_actor para buscar actores por 
+título de película.*/
 
 SELECT a.first_name, a.last_name
 FROM actor AS a
@@ -112,12 +122,15 @@ INNER JOIN film AS f
 WHERE f.title = 'Indian Love';
 
 /*14. Muestra el título de todas las películas que contengan la palabra "dog" o "cat" 
-en su descripción.*/
+en su descripción.
+- LIKE para buscar patrones "dog" y "cat" en las descripciones de las películas. REGEXP 'dog|cat';*/
+
 SELECT title, description
 FROM film
 WHERE description LIKE '%dog%' OR description LIKE '%cat%';
 
 -- 15. Hay algún actor o actriz que no apareca en ninguna película en la tabla film_actor.
+-- LEFT JOIN para encontrar actores sin películas relacionadas y filtramos los NULL.
 
 SELECT a.first_name, a.last_name
 FROM actor AS a
@@ -135,7 +148,7 @@ FROM film_actor;
 -- (ver otra forma de fusionar esto).
 
 -- 16.Encuentra el título de todas las películas que fueron lanzadas entre el año 2005 y 2010.
-/* 1: Primero creé esta consulta sencilla pero solo me rrojaba películas del 2006.
+/* 1: Primero creé esta consulta sencilla pero solo me arrojaba películas del 2006.
 Quería saber si había más películas deotros años o simplemente del 2006. por lo que hice subconsulta*/
 
 SELECT title
@@ -146,6 +159,7 @@ WHERE release_year
 -- DARLE UNA VUELTA
 
 -- 17. Encuentra el título de todas las películas que son de la misma categoría que "Family".
+-- JOIN para conectar las categorías y se filtra por el nombre de la categoría.
 
 SELECT f.title
 FROM film AS f
@@ -156,6 +170,7 @@ INNER JOIN category AS c
 WHERE c.name = 'Family';
 
 -- 18. Muestra el nombre y apellido de los actores que aparecen en más de 10 películas.
+-- Se agrupa por actor y se cuentan las películas, luego se filtra para sacar los que tienen más de 10.
 
 SELECT a.first_name, a.last_name, COUNT(fa.film_id) AS total_films
 FROM actor AS a
@@ -221,7 +236,8 @@ WHERE a.actor_id NOT IN (
 	WHERE c.name = 'Horror');
 
 /* 24. BONUS: Encuentra el título de las películas que son comedias y tienen 
-una duración mayor a 180 minutos en la tabla film.*/
+una duración mayor a 180 minutos en la tabla film.
+-Conecto film, category y film_category y filtro por categoría y duración.*/
 
 SELECT f.title, c.name AS cat_name
 FROM film AS f
@@ -236,5 +252,3 @@ La consulta debe mostrar el nombre y apellido de los actores y el número
 de películas en las que han actuado juntos.*/
 
 SELECT 
-
-

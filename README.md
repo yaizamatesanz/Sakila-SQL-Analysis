@@ -1,40 +1,50 @@
-# bda-modulo-2-evaluacion-final-yaizamatesanz
-Este repositorio contiene las soluciones a los ejercicios de la evaluación final del Módulo 2 del Bootcamp Data Analytics de Adalab.
-En este módulo trabajamos con la base de datos Sakila, que simula una tienda de alquiler de películas.
+# 🎬 SQL Mastery with Sakila  
+**Final Evaluation of Module 2** | Data Analytics Bootcamp  
 
-## Descripción:
+## Description  
+This repository contains my solutions to the final evaluation exercises for Module 2 of the Adalab Data Analytics Bootcamp. In this module, we worked with the Sakila database, a simulation of a movie rental store.  
 
-El proyecto consiste en resolver una serie de consultas SQL que exploran diferentes aspectos de la base de datos Sakila como películas, actores, categorías y alquileres.
+The project involved solving a series of SQL queries to explore various aspects of the Sakila database, such as movies, actors, categories, and rentals.
 
-### Ejercicios:
+## 📝 Exercises  
+1. Retrieve unique movie titles.  
+2. Find movies with a "PG-13" rating.  
+3. List movies with the word "amazing" in their description.  
+4. Select movies with a runtime greater than 120 minutes.  
+5. Display the names of all actors.  
+6. Find actors with the last name "Gibson."  
+7. Retrieve actors with IDs between 10 and 20.  
+8. List movies that are neither rated "R" nor "PG-13."  
+9. Count movies by rating.  
+10. Calculate the total movies rented by each customer.  
+11. Count movies rented by category.  
+12. Determine the average runtime of movies by rating.  
+13. List actors in the movie "Indian Love."  
+14. Retrieve movies containing "dog" or "cat" in their description.  
+15. Find actors who do not appear in any movie.  
+16. Select movies released between 2005 and 2010.  
+17. List movies from the same category as "Family."  
+18. Retrieve actors featured in more than 10 movies.  
+19. Find "R"-rated movies with a runtime over 2 hours.  
+20. List categories with an average runtime greater than 120 minutes.  
+21. Identify actors who have appeared in at least 5 movies.  
+22. Retrieve movies rented for more than 5 days.  
+23. Find actors who have not acted in "Horror" movies.  
+24. Select comedy movies with a runtime exceeding 180 minutes.  
+25. List pairs of actors who have appeared together in at least one movie.
 
-1. Selección de títulos únicos de películas.
-2. Búsqueda de películas con clasificación "PG-13".
-3. Películas con la palabra "amazing" en la descripción.
-4. Películas con una duración mayor a 120 minutos.
-5. Listado de nombres de todos los actores.
-6. Actores con el apellido "Gibson".
-7. Actores con IDs entre 10 y 20.
-8. Películas que no son "R" ni "PG-13".
-9. Recuento de películas por clasificación.
-10. Total de películas alquiladas por cliente.
-11. Total de películas alquiladas por categoría.
-12. Promedio de duración de las películas por clasificación.
-13. Actores en la película "Indian Love".
-14. Películas que contienen "dog" o "cat" en la descripción.
-15. Actores que no aparecen en ninguna película.
-16. Películas lanzadas entre 2005 y 2010.
-17. Películas de la misma categoría que "Family".
-18. Actores en más de 10 películas.
-19. Películas "R" de más de 2 horas.
-20. Categorías con promedio de duración superior a 120 minutos.
-21. Actores que han actuado en al menos 5 películas.
-22. Películas alquiladas por más de 5 días.
-23. Actores que no han actuado en "Horror".
-24. Películas de comedia con más de 180 minutos.
-25. Actores que han actuado juntos en al menos una película.
+## 🔧 Tools Used  
+- **MySQL**  
+- **Sakila Database**  
 
-## Herramientas utilizadas
+## 🚀 How to Run It  
+1. Download or clone this repository to your local machine.  
+2. Import the Sakila database into your MySQL environment.  
+3. Run the SQL scripts included in this repository to explore the queries and their results.
 
-- MySQL.
-- Base de datos Sakila.
+## ❤️ Personal Note  
+This project highlights my ability to work with relational databases and perform complex SQL queries. Using the Sakila database as a movie rental simulation made the experience both challenging and engaging.  
+
+---
+
+🌟 **Let’s connect! Check out my [LinkedIn profile](https://www.linkedin.com/in/yaiza-matesanz-aviles)** for more about me and my work.
